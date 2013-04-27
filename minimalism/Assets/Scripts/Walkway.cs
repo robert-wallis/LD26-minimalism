@@ -7,8 +7,8 @@ public class Walkway : MonoBehaviour
 	public GameObject walkwayPrefab;
 	public GameObject pushObject;
 	public GameObject player;
-	public float speed = 30f;
 	public float walkwayGenerationDistance = 100f;
+	public float walkwayRemovalDistance = 50f;
 	Vector3 incrementPosition;
 	Vector3 currentPosition;
 	Quaternion currentRotation;
@@ -30,7 +30,6 @@ public class Walkway : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		player.transform.Translate(0f, 0f, speed * Time.fixedDeltaTime);
 		GenerateWalkways();
 		if (player.transform.position.z > lastHigh) {
 			GA.API.Design.NewEvent("player:walkway:high", player.transform.position.z);
@@ -47,14 +46,14 @@ public class Walkway : MonoBehaviour
 			walkways.AddLast(newWalkway);
 			currentPosition += incrementPosition;
 		}
-		// TODO: remove old walkways
-		if (walkways.Count > 1) {
-			// this should stop near us
-			while ((player.transform.position - walkways.First.Value.transform.position).magnitude > 10f) {
-				GameObject removable = walkways.First.Value;
-				walkways.RemoveFirst();
-				Destroy(removable);
-			}
+		// this should stop near us
+		while (walkways.Count > 0 &&
+				(player.transform.position - walkways.First.Value.transform.position)
+					.magnitude > walkwayRemovalDistance)
+		{
+			GameObject removable = walkways.First.Value;
+			walkways.RemoveFirst();
+			Destroy(removable);
 		}
 	}
 }
