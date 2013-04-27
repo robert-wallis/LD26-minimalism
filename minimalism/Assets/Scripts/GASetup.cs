@@ -5,7 +5,7 @@ public class GASetup : MonoBehaviour
 {
 	void Awake()
 	{
-		GA.SettingsGA.DebugMode = false;
+		GA.SettingsGA.DebugMode = true;
 	}
 
 }
