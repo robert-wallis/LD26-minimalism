@@ -43,4 +43,10 @@ class GameState : MonoBehaviour
 		GameObject.Find("/Player/Mesh").renderer.enabled = false;
 		GA.API.Design.NewEvent("player:gameover:" + cause.name, player.transform.position);
 	}
+
+	public void GameWin()
+	{
+		// TODO: real game win
+		GameOver(this.gameObject);
+	}
 }

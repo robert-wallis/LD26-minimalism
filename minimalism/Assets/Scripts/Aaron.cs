@@ -37,7 +37,7 @@ public class Aaron : MonoBehaviour
 	{
 		spawnPosition = spawnPositionDefault;
 		spawnRotation = walkwayPrefab.transform.rotation;
-		walkwaysLeft = 50;
+		walkwaysLeft = 300;
 		generatePowerup = 100f;
 		while (walkways.Count > 0) {
 			GameObject removable = walkways.First.Value;
