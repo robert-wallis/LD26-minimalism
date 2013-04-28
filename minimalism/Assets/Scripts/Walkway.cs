@@ -41,6 +41,7 @@ public class Walkway : MonoBehaviour
 	{
 		spawnPosition = spawnPositionDefault;
 		walkwaysLeft = 50;
+		generatePowerup = 100f;
 	}
 
 	void Update()
