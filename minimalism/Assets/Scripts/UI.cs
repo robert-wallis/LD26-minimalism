@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UI : MonoBehaviour
 {
-	public static string VERSION = "0.4";
+	public static string VERSION = "0.5";
 	FLabel version;
 	FLabel walkwaysLeft;
 
@@ -21,8 +21,8 @@ public class UI : MonoBehaviour
 
 		walkway = GetComponent<Walkway>();
 		walkwaysLeft = new FLabel("comfortaa32", "");
-		walkwaysLeft.anchorX = 1f;
-		walkwaysLeft.x = Futile.screen.halfWidth - 20;
+		walkwaysLeft.anchorY = 0f;
+		walkwaysLeft.y = -Futile.screen.halfHeight + 20;
 		Futile.stage.AddChild(walkwaysLeft);
 	}
 

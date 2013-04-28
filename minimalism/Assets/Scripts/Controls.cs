@@ -26,7 +26,7 @@ public class Controls : MonoBehaviour
 	{
 		player.transform.position = playerStartPosition;
 		player.transform.rotation = playerStartRotation;
-		player.rigidbody.velocity = Vector3.zero;
+		player.rigidbody.velocity = Vector3.forward * 20f;
 	}
 
 	void Update()
@@ -39,7 +39,7 @@ public class Controls : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		player.transform.Translate(0f, 0f, speed * Time.fixedDeltaTime);
+		//player.transform.Translate(0f, 0f, speed * Time.fixedDeltaTime);
 		if (Vector3.zero != jumpVector) {
 			player.rigidbody.AddForce(jumpVector);
 			jumpVector = Vector3.zero;

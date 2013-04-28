@@ -10,9 +10,11 @@ class GameState : MonoBehaviour
 	Vector3 playerStartPosition;
 	Quaternion playerStartRotation;
 	GameOver gameover;
+	public static GameState instance;
 
 	void Awake()
 	{
+		instance = this; // not a CS singleton, but is a Unity singleton
 		walkway = GetComponent<Walkway>();
 		controls = GetComponent<Controls>();
 		player = GameObject.Find("/Player");
@@ -24,7 +26,7 @@ class GameState : MonoBehaviour
 	{
 		// game over
 		if (player.transform.position.y < -10) {
-			GameOver();
+			GameOver(this.gameObject);
 		}
 	}
 
@@ -36,12 +38,12 @@ class GameState : MonoBehaviour
 		GameObject.Find("/Player/Mesh").renderer.enabled = true;
 	}
 
-	public void GameOver()
+	public void GameOver(GameObject cause)
 	{
 		gameover.enabled = true;
 		walkway.enabled = false;
 		controls.enabled = false;
 		GameObject.Find("/Player/Mesh").renderer.enabled = false;
-		GA.API.Design.NewEvent("player:distance:gameover", player.transform.position.z);
+		GA.API.Design.NewEvent("player:gameover:" + cause.name, player.transform.position);
 	}
 }
