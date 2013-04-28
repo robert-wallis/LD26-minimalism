@@ -31,7 +31,7 @@ class GameOver : MonoBehaviour
 		Futile.stage.AddChild(countDown);
 	}
 
-	void OnDisable()
+	void CleanupUI()
 	{
 		if (null != gameOver) {
 			Futile.stage.RemoveChild(gameOver);
@@ -48,6 +48,7 @@ class GameOver : MonoBehaviour
 		}
 		countDown.text = "" + (int)(waitLeft + 1f);
 		if (waitLeft < 0) {
+			CleanupUI();
 			gamestate.StartGame();
 		}
 		waitLeft -= Time.deltaTime;
