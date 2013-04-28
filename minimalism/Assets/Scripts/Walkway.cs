@@ -21,42 +21,32 @@ public class Walkway : MonoBehaviour
 	public uint highScoreDistance = 1000;
 	[HideInInspector]
 	public uint highScoreWalkways = 100;
-	float generatePowerup = 100f;
-
+	float generatePowerup;
 	public uint walkwaysLeft;
 
 	void Start()
 	{
 		walkways = new LinkedList<GameObject>();
 		powerups = new LinkedList<GameObject>();
+		incrementPosition = new Vector3(0.0f, 0.0f, 10.0f);
+		Cleanup();
+	}
+
+	void Cleanup()
+	{
 		spawnPosition = spawnPositionDefault;
 		spawnRotation = walkwayPrefab.transform.rotation;
-		incrementPosition = new Vector3(0.0f, 0.0f, 10.0f);
-	}
-
-	void OnEnable()
-	{
-		ResetGame();
-	}
-
-	void ResetGame()
-	{
-		spawnPosition = spawnPositionDefault;
 		walkwaysLeft = 50;
 		generatePowerup = 100f;
-		if (null != walkways) {
-			while (walkways.Count > 0) {
-				GameObject removable = walkways.First.Value;
-				Destroy(removable);
-				walkways.RemoveFirst();
-			}
+		while (walkways.Count > 0) {
+			GameObject removable = walkways.First.Value;
+			Destroy(removable);
+			walkways.RemoveFirst();
 		}
-		if (null != powerups) {
-			while (powerups.Count > 0) {
-				GameObject removable = powerups.First.Value;
-				Destroy(removable);
-				powerups.RemoveFirst();
-			}
+		while (powerups.Count > 0) {
+			GameObject removable = powerups.First.Value;
+			Destroy(removable);
+			powerups.RemoveFirst();
 		}
 	}
 
@@ -68,6 +58,9 @@ public class Walkway : MonoBehaviour
 		}
 		if (Input.GetKeyDown(KeyCode.KeypadMinus)) {
 			walkwaysLeft -= 10;
+		}
+		if (Input.GetKeyDown(KeyCode.KeypadMultiply)) {
+			GameState.instance.GameOver(this.gameObject);
 		}
 	}
 

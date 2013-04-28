@@ -18,8 +18,13 @@ public class Alex : MonoBehaviour
 		}
 	}
 
+	public void Cleanup()
+	{
+		pillars.Cleanup();
+	}
+
 	public void SendPillars()
 	{
-		pillars.SendBlock();
+		pillars.SendBlocks();
 	}
 }

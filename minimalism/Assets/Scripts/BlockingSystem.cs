@@ -22,6 +22,16 @@ public class BlockingSystem : MonoBehaviour
 		blockingObjects = new LinkedList<GameObject>();
 	}
 
+	public void Cleanup()
+	{
+		leftToSend = 0;
+		delayLeft = 0f;
+		while (blockingObjects.Count > 0) {
+			Destroy(blockingObjects.First.Value);
+			blockingObjects.RemoveFirst();
+		}
+	}
+
 	// Update is called once per frame
 	void Update()
 	{
@@ -36,14 +46,14 @@ public class BlockingSystem : MonoBehaviour
 			}
 			delayLeft -= Time.deltaTime;
 		}
-		while (blockingObjects.Count > 0 && 
+		while (blockingObjects.Count > 0 &&
 			blockingObjects.First.Value.transform.position.z < player.transform.position.z) {
-				Destroy(blockingObjects.First.Value);
-				blockingObjects.RemoveFirst();
+			Destroy(blockingObjects.First.Value);
+			blockingObjects.RemoveFirst();
 		}
 	}
 
-	public void SendBlock()
+	public void SendBlocks()
 	{
 		leftToSend = amountToSend;
 	}

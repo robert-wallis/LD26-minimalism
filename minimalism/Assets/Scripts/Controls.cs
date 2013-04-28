@@ -15,14 +15,11 @@ public class Controls : MonoBehaviour
 		player = GameObject.Find("Player");
 		playerStartPosition = player.transform.position;
 		playerStartRotation = player.transform.rotation;
+		Cleanup();
 	}
 
-	void OnEnable()
-	{
-		ResetGame();
-	}
-
-	void ResetGame()
+	// called from GameState send message
+	public void Cleanup()
 	{
 		player.transform.position = playerStartPosition;
 		player.transform.rotation = playerStartRotation;

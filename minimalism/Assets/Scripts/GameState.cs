@@ -35,6 +35,7 @@ class GameState : MonoBehaviour
 		gameover.enabled = false;
 		walkway.enabled = true;
 		controls.enabled = true;
+		SendMessageUpwards("Cleanup", SendMessageOptions.DontRequireReceiver);
 		GameObject.Find("/Player/Mesh").renderer.enabled = true;
 	}
 
