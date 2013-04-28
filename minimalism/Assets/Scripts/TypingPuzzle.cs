@@ -18,7 +18,7 @@ public class TypingPuzzle : MonoBehaviour
 			"puzzle-down",
 			"puzzle-left",
 	};
-	float buttonWidth = 0f;
+	float nextX = 0f;
 	uint currentChar;
 	bool inPuzzle = false;
 	Alex.Puzzle currentPuzzle;
@@ -63,14 +63,15 @@ public class TypingPuzzle : MonoBehaviour
 		puzzleSequence = new int[puzzle.arrowLength];
 		labelsOn = new FSprite[puzzle.arrowLength];
 		labelsOff = new FSprite[puzzle.arrowLength];
+		nextX = 0f;
 		for (int i = 0; i < puzzle.arrowLength; i++) {
-			puzzleSequence[i] = Random.Range(0, 3);
+			puzzleSequence[i] = Random.Range(0, 4);
 			labelsOn[i] = new FSprite(buttonNames[puzzleSequence[i]] + "-on");
 			labelsOff[i] = new FSprite(buttonNames[puzzleSequence[i]] + "-off");
-			labelsOn[i].x = i * buttonWidth; 
-			labelsOff[i].x = i * buttonWidth; 
+			labelsOn[i].x = nextX; 
+			labelsOff[i].x = nextX; 
 			// next button to the right
-			buttonWidth = labelsOn[i].width + 5f;
+			nextX += labelsOn[i].width + 5f;
 			puzzleUI.AddChild(labelsOff[i]);
 		}
 	}
@@ -171,7 +172,9 @@ public class TypingPuzzle : MonoBehaviour
 			} else if (currentPuzzle.words) {
 				WordPuzzleWrongKey();
 			}
-			audio.PlayOneShot(typeFail);
+			if (sequenceId != (uint)' ') {
+				audio.PlayOneShot(typeFail);
+			}
 		}
 	}
 

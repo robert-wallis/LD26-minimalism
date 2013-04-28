@@ -36,6 +36,11 @@ public class Controls : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		// constant speed, sometimes something hits us and slows us down
+		Vector3 newV = player.rigidbody.velocity;
+		newV.z = speed;
+		player.rigidbody.velocity = newV;
+
 		if (Vector3.zero != jumpVector) {
 			player.rigidbody.AddForce(jumpVector);
 			jumpVector = Vector3.zero;

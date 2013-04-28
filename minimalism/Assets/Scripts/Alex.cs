@@ -6,8 +6,8 @@ public class Alex : MonoBehaviour
 	public BlockingSystem pillars;
 	public TypingPuzzle typingPuzzle;
 
-	public float timeTillObstacle = 3f;
-	public float timeTillObstacleRefill = 3f;
+	float timeTillObstacle = 3f;
+	float timeTillObstacleRefill = 5f;
 	bool puzzleInPlay = false;
 
 	public AudioClip[] alexWordPuzzle;
@@ -38,7 +38,6 @@ public class Alex : MonoBehaviour
 	}
 
 	Puzzle[] puzzles = {
-		new Puzzle(false, 0, true, "destroy", "build", 0, 0),
 		new Puzzle(true, 1, false, "", "", 0, 0),
 		new Puzzle(true, 2, false, "", "", 0, 0),
 		new Puzzle(true, 3, false, "", "", 0, 0),
@@ -110,7 +109,7 @@ public class Alex : MonoBehaviour
 			aaronObject.audio.PlayOneShot(aaronWordPuzzle[puzzles[currentPuzzle].aaronWordClipId]);
 		} else {
 			if (Random.Range(0, 2) > 0) {
-				alexObject.audio.PlayOneShot(alexNo[Random.Range(0, alexNo.Length-1)]);
+				alexObject.audio.PlayOneShot(alexNo[Random.Range(0, alexNo.Length)]);
 			}
 		}
 		currentPuzzle++;
