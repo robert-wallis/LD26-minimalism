@@ -149,7 +149,6 @@ public class Go : MonoBehaviour
 		// store a list of all the properties in the tween
 		var allProperties = tween.allTweenProperties();
 		
-		// TODO: perhaps only perform the check on running Tweens?
 		
 		// loop through all the tweens with the same target
 		foreach( var tweenWithTarget in allTweensWithTarget )
@@ -169,7 +168,6 @@ public class Go : MonoBehaviour
 					}
 					else if( duplicatePropertyRule == GoDuplicatePropertyRuleType.RemoveRunningProperty )
 					{
-						// TODO: perhaps check if the Tween has any properties left and remove it if it doesnt?
 						tweenWithTarget.removeTweenProperty( tweenProp );
 					}
 					

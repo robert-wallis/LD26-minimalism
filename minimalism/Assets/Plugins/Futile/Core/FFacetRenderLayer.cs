@@ -224,7 +224,6 @@ public class FFacetRenderLayer : FRenderableLayerInterface
 			_mesh.triangles = _triangles;
 			_mesh.uv = _uvs;
 			
-			//TODO: switch to using colors32 at some point for performance
 			//see http://docs.unity3d.com/Documentation/ScriptReference/Mesh-colors32.html
 			_mesh.colors = _colors;
 		}
@@ -312,7 +311,6 @@ public class FQuadRenderLayer : FFacetRenderLayer
 			//the high 1000000 Z should make them get culled and not rendered because they're behind the camera 
 			//need x to be 50 so they're "in screen" and not getting culled outside the bounds
 			//because once something is marked outside the bounds, it won't get rendered until the next mesh.Clear()
-			//TODO: test if the high z actually gives better performance or not
 			_vertices[vertexIndex + 0].Set(50,0,1000000);	
 			_vertices[vertexIndex + 1].Set(50,0,1000000);	
 			_vertices[vertexIndex + 2].Set(50,0,1000000);	
@@ -397,7 +395,6 @@ public class FTriangleRenderLayer : FFacetRenderLayer
 			//the high 1000000 Z should make them get culled and not rendered because they're behind the camera 
 			//need x to be 50 so they're "in screen" and not getting culled outside the bounds
 			//because once something is marked outside the bounds, it won't get rendered until the next mesh.Clear()
-			//TODO: test if the high z actually gives better performance or not
 			_vertices[vertexIndex + 0].Set(50,0,1000000);	
 			_vertices[vertexIndex + 1].Set(50,0,1000000);	
 			_vertices[vertexIndex + 2].Set(50,0,1000000);

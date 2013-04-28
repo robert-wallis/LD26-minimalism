@@ -67,7 +67,6 @@ public class FAtlas
 	
 	private bool _isTextureAnAsset = false;
 	
-	//TODO: allow users to pass a dictionary of pre-built atlas data if they want
 	public FAtlas (string name, Texture texture, int index) //single image
 	{
 		_name = name;
@@ -229,7 +228,6 @@ public class FAtlas
 		element.name = _name;
 		element.indexInAtlas = 0;
 		
-		//TODO: may have to offset the rect slightly
 		float scaleInverse = Futile.resourceScaleInverse;
 		
 		Rect uvRect = new Rect(0.0f,0.0f,1.0f,1.0f);

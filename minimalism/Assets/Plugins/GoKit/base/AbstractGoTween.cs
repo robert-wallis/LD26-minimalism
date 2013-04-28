@@ -137,7 +137,6 @@ public abstract class AbstractGoTween
 		}
 		else
 		{
-			// TODO: when we increment a completed iteration (go from 0 to 1 for example) we should probably run through once setting
 			// _elapsedTime = duration so that complete handlers in a chain or flow fire when expected
 			_elapsedTime = _totalElapsedTime % duration; // have finished at least one iteration
 		}

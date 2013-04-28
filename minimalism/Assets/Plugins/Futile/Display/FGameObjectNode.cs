@@ -127,7 +127,6 @@ public class FGameObjectNode : FNode, FRenderableLayerInterface
 	{
 		if(_isOnStage) 
 		{
-			//TODO: Get these values correctly using the full matrix
 			//do it with scale too
 			
 			//need to use the FULL global matrix

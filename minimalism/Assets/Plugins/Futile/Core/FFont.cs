@@ -495,7 +495,6 @@ public class FFont
 					}
 				}
 				
-				//TODO: Reuse letterquads with pooling!
 				FLetterQuad letterQuad = new FLetterQuad();
 				
 				if(_charInfosByID.ContainsKey(letter))
