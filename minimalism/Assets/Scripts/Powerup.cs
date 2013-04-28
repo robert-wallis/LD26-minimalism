@@ -3,19 +3,19 @@ using System.Collections;
 
 public class Powerup : MonoBehaviour
 {
-	Walkway walkway;
+	Aaron aaron;
 	public uint value = 11;
 
 	// Use this for initialization
 	void Start()
 	{
-		walkway = GameObject.Find("game").GetComponent<Walkway>();
+		aaron = GameObject.Find("game").GetComponent<Aaron>();
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.collider.name == "Player") {
-			walkway.walkwaysLeft += value;
+			aaron.walkwaysLeft += value;
 			audio.Play();
 			Destroy(this);
 		}

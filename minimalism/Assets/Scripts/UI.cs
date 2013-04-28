@@ -7,7 +7,7 @@ public class UI : MonoBehaviour
 	FLabel version;
 	FLabel walkwaysLeft;
 
-	Walkway walkway;
+	Aaron aaron;
 
 	void Start()
 	{
@@ -19,7 +19,7 @@ public class UI : MonoBehaviour
 		version.y = -Futile.screen.halfHeight + 15;
 		Futile.stage.AddChild(version);
 
-		walkway = GetComponent<Walkway>();
+		aaron = GetComponent<Aaron>();
 		walkwaysLeft = new FLabel("comfortaa32", "");
 		walkwaysLeft.anchorY = 0f;
 		walkwaysLeft.y = -Futile.screen.halfHeight + 20;
@@ -42,6 +42,6 @@ public class UI : MonoBehaviour
 
 	void Update()
 	{
-		walkwaysLeft.text = walkway.walkwaysLeft + " left";
+		walkwaysLeft.text = aaron.walkwaysLeft + " left";
 	}
 }

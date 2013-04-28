@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Walkway : MonoBehaviour
+// the brother that helps you out
+public class Aaron : MonoBehaviour
 {
 	public GameObject walkwayPrefab;
 	public GameObject powerupPrefab;
@@ -87,7 +88,7 @@ public class Walkway : MonoBehaviour
 		while (walkwaysLeft > 0 
 			&& (spawnPosition - player.transform.position).z < walkwayGenerationDistance) {
 			GameObject newWalkway = (GameObject)Instantiate(walkwayPrefab, spawnPosition, spawnRotation);
-			newWalkway.name = "walkway " + spawnPosition.z;
+			newWalkway.name = "aaron " + spawnPosition.z;
 			newWalkway.transform.parent = pushObject.transform;
 			newWalkway.transform.Translate(Vector3.left * 30f);
 			newWalkway.transform.Rotate(Vector3.forward + Vector3.up, 180f);
@@ -103,7 +104,7 @@ public class Walkway : MonoBehaviour
 			spawnPosition += incrementPosition;
 			walkwaysLeft--;
 		}
-		// the first walkway ahead of us will stop the loop from deleting valid walkways
+		// the first aaron ahead of us will stop the loop from deleting valid walkways
 		while (walkways.Count > 0 
 			&& (player.transform.position - walkways.First.Value.transform.position) .z > 20f) {
 			GameObject removable = walkways.First.Value;

@@ -4,7 +4,6 @@ using UnityEngine;
 
 class GameState : MonoBehaviour
 {
-	Walkway walkway;
 	Controls controls;
 	GameObject player;
 	Vector3 playerStartPosition;
@@ -15,7 +14,6 @@ class GameState : MonoBehaviour
 	void Awake()
 	{
 		instance = this; // not a CS singleton, but is a Unity singleton
-		walkway = GetComponent<Walkway>();
 		controls = GetComponent<Controls>();
 		player = GameObject.Find("/Player");
 		gameover = GetComponent<GameOver>();
@@ -33,7 +31,6 @@ class GameState : MonoBehaviour
 	public void StartGame()
 	{
 		gameover.enabled = false;
-		walkway.enabled = true;
 		controls.enabled = true;
 		SendMessageUpwards("Cleanup", SendMessageOptions.DontRequireReceiver);
 		GameObject.Find("/Player/Mesh").renderer.enabled = true;
@@ -42,7 +39,6 @@ class GameState : MonoBehaviour
 	public void GameOver(GameObject cause)
 	{
 		gameover.enabled = true;
-		walkway.enabled = false;
 		controls.enabled = false;
 		GameObject.Find("/Player/Mesh").renderer.enabled = false;
 		GA.API.Design.NewEvent("player:gameover:" + cause.name, player.transform.position);
