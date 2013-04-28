@@ -8,36 +8,62 @@ public class Walkway : MonoBehaviour
 	public GameObject powerupPrefab;
 	public GameObject pushObject;
 	public GameObject player;
-	float walkwayGenerationDistance = 100f;
+	float walkwayGenerationDistance = 70f;
+	Vector3 spawnPosition;
+	static Vector3 spawnPositionDefault = new Vector3(0.0f, -1.0f, 0.0f);
+	Quaternion spawnRotation;
 	Vector3 incrementPosition;
-	Vector3 currentPosition;
-	Quaternion currentRotation;
 	Vector3 powerupHeight = new Vector3(0f, 5f, 0f);
 	LinkedList<GameObject> walkways;
 	LinkedList<GameObject> powerups;
 
-	float lastHigh = 1000f;
+	[HideInInspector] public uint highScoreDistance = 1000;
+	[HideInInspector] public uint highScoreWalkways = 100;
 	float generatePowerup = 100f;
+
+	public uint walkwaysLeft;
 
 	void Start()
 	{
 		walkways = new LinkedList<GameObject>();
 		powerups = new LinkedList<GameObject>();
-		currentPosition = new Vector3(0.0f, -1.0f, 0.0f);
-		currentRotation = walkwayPrefab.transform.rotation;
+		spawnPosition = spawnPositionDefault;
+		spawnRotation = walkwayPrefab.transform.rotation;
 		incrementPosition = new Vector3(0.0f, 0.0f, 10.0f);
+	}
+
+	void OnEnable()
+	{
+		ResetGame();
+	}
+
+	void ResetGame()
+	{
+		spawnPosition = spawnPositionDefault;
+		walkwaysLeft = 50;
 	}
 
 	void Update()
 	{
+		// TODO: remove cheat
+		if (Input.GetKeyDown(KeyCode.KeypadPlus)) {
+			walkwaysLeft += 10;
+		}
+		if (Input.GetKeyDown(KeyCode.KeypadMinus)) {
+			walkwaysLeft -= 10;
+		}
 	}
 
 	void FixedUpdate()
 	{
 		GenerateWalkways();
-		if (player.transform.position.z > lastHigh) {
-			GA.API.Design.NewEvent("player:walkway:high", player.transform.position.z);
-			lastHigh = (((int)player.transform.position.z / 1000) * 1000) + 1000f;
+		if (player.transform.position.z > highScoreDistance) {
+			GA.API.Design.NewEvent("player:distance:high", player.transform.position.z);
+			highScoreDistance = (((uint)player.transform.position.z / 1000) * 1000) + 1000;
+		}
+		if (walkwaysLeft > highScoreWalkways) {
+			GA.API.Design.NewEvent("player:walkways:high", walkwaysLeft);
+			highScoreWalkways = ((walkwaysLeft / 100) * 100) + 100;
 		}
 		if (player.transform.position.z > generatePowerup) {
 			generatePowerup = (((int)player.transform.position.z / 100) * 100) + 100f;
@@ -48,12 +74,25 @@ public class Walkway : MonoBehaviour
 	void GenerateWalkways()
 	{
 		// make new walkways
-		while ((player.transform.position - currentPosition).magnitude < walkwayGenerationDistance) {
-			GameObject newWalkway = (GameObject)Instantiate(walkwayPrefab, currentPosition, currentRotation);
-			newWalkway.name = "walkway " + currentPosition.z;
+		while (walkwaysLeft > 0 &&
+				(player.transform.position - spawnPosition)
+				.magnitude < walkwayGenerationDistance) {
+			GameObject newWalkway = (GameObject)Instantiate(walkwayPrefab, spawnPosition, spawnRotation);
+			newWalkway.name = "walkway " + spawnPosition.z;
 			newWalkway.transform.parent = pushObject.transform;
+			newWalkway.transform.Translate(spawnPosition - (Vector3.up * 0.5f));
+			newWalkway.transform.Rotate(Vector3.forward, 90f);
+			Go.to(
+				newWalkway.transform,
+				1.5f,
+				new GoTweenConfig()
+					.position(spawnPosition)
+					.rotation(spawnRotation)
+					.setEaseType(GoEaseType.SineIn)
+			);
 			walkways.AddLast(newWalkway);
-			currentPosition += incrementPosition;
+			spawnPosition += incrementPosition;
+			walkwaysLeft--;
 		}
 		// the first walkway ahead of us will stop the loop from deleting valid walkways
 		while (walkways.Count > 0 &&
@@ -68,8 +107,8 @@ public class Walkway : MonoBehaviour
 
 	void GeneratePowerup()
 	{
-		GameObject newPowerup = (GameObject)Instantiate(powerupPrefab, currentPosition + powerupHeight, powerupPrefab.transform.rotation);
-		newPowerup.name = "powerup " + currentPosition.z;
+		GameObject newPowerup = (GameObject)Instantiate(powerupPrefab, spawnPosition + powerupHeight, powerupPrefab.transform.rotation);
+		newPowerup.name = "powerup " + spawnPosition.z;
 		newPowerup.transform.parent = pushObject.transform;
 		powerups.AddLast(newPowerup);
 
@@ -83,4 +122,5 @@ public class Walkway : MonoBehaviour
 			Destroy(removable);
 		}
 	}
+
 }

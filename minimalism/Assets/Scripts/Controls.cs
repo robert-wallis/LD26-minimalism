@@ -3,20 +3,36 @@ using System.Collections;
 
 public class Controls : MonoBehaviour
 {
-	public GameObject player;
+	GameObject player;
 	float speed = 30f;
 	float jumpForce = 400f;
 	Vector3 jumpVector = Vector3.zero;
+	Vector3 playerStartPosition;
+	Quaternion playerStartRotation;
 
-	// Use this for initialization
-	void Start()
+	void Awake()
 	{
+		player = GameObject.Find("Player");
+		playerStartPosition = player.transform.position;
+		playerStartRotation = player.transform.rotation;
 	}
 
-	// Update is called once per frame
+	void OnEnable()
+	{
+		ResetGame();
+	}
+
+	void ResetGame()
+	{
+		player.transform.position = playerStartPosition;
+		player.transform.rotation = playerStartRotation;
+		player.rigidbody.velocity = Vector3.zero;
+	}
+
 	void Update()
 	{
 		if (Input.GetButtonDown("Fire1")) {
+			player.audio.Play();
 			jumpVector = Vector3.up * jumpForce;
 		}
 	}
