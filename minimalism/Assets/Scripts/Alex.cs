@@ -13,6 +13,8 @@ public class Alex : MonoBehaviour
 	public AudioClip[] alexWordPuzzle;
 	public AudioClip[] aaronWordPuzzle;
 	public AudioClip[] alexNo;
+	GameObject alexObject;
+	GameObject aaronObject;
 
 	public class Puzzle
 	{
@@ -64,6 +66,8 @@ public class Alex : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		alexObject = GameObject.Find("/game/alex");
+		aaronObject = GameObject.Find("/game/aaron");
 	}
 
 	// Update is called once per frame
@@ -75,6 +79,9 @@ public class Alex : MonoBehaviour
 				timeTillObstacle = timeTillObstacleRefill;
 				puzzleInPlay = true;
 				SendPillars();
+				if (puzzles[currentPuzzle].words) {
+					alexObject.audio.PlayOneShot(alexWordPuzzle[puzzles[currentPuzzle].alexWordClipId]);
+				}
 				typingPuzzle.GeneratePuzzle(this, puzzles[currentPuzzle]);
 			}
 		}
@@ -99,6 +106,13 @@ public class Alex : MonoBehaviour
 	{
 		pillars.Cleanup();
 		puzzleInPlay = false;
+		if (puzzles[currentPuzzle].words) {
+			aaronObject.audio.PlayOneShot(aaronWordPuzzle[puzzles[currentPuzzle].aaronWordClipId]);
+		} else {
+			if (Random.Range(0, 2) > 0) {
+				alexObject.audio.PlayOneShot(alexNo[Random.Range(0, alexNo.Length-1)]);
+			}
+		}
 		currentPuzzle++;
 		if (currentPuzzle >= puzzles.Length) {
 			GameState.instance.GameWin();
