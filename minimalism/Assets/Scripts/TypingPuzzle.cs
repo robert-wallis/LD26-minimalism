@@ -24,7 +24,7 @@ public class TypingPuzzle : MonoBehaviour
 	void Start()
 	{
 		puzzleUI = new FContainer();
-		puzzleUI.x = Futile.screen.halfWidth * .5f;
+		puzzleUI.x = Futile.screen.width * .1f;
 		Futile.stage.AddChild(puzzleUI);
 	}
 
@@ -62,18 +62,37 @@ public class TypingPuzzle : MonoBehaviour
 	void Update()
 	{
 		if (inPuzzle && currentChar < puzzleSequence.Length) {
-			if (Input.GetKeyDown(KeyCode.UpArrow)) {
-				KeyHit(0);
-			}
-			if (Input.GetKeyDown(KeyCode.RightArrow)) {
-				KeyHit(1);
-			}
-			if (Input.GetKeyDown(KeyCode.DownArrow)) {
-				KeyHit(2);
-			}
-			if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-				KeyHit(3);
-			}
+			if (Input.GetKeyDown(KeyCode.UpArrow)) { KeyHit(0); }
+			if (Input.GetKeyDown(KeyCode.RightArrow)) { KeyHit(1); }
+			if (Input.GetKeyDown(KeyCode.DownArrow)) { KeyHit(2); }
+			if (Input.GetKeyDown(KeyCode.LeftArrow)) { KeyHit(3); }
+			if (Input.GetKeyDown(KeyCode.A)) { KeyHit((uint)'a'); }
+			if (Input.GetKeyDown(KeyCode.B)) { KeyHit((uint)'b'); }
+			if (Input.GetKeyDown(KeyCode.C)) { KeyHit((uint)'c'); }
+			if (Input.GetKeyDown(KeyCode.D)) { KeyHit((uint)'d'); }
+			if (Input.GetKeyDown(KeyCode.E)) { KeyHit((uint)'e'); }
+			if (Input.GetKeyDown(KeyCode.F)) { KeyHit((uint)'f'); }
+			if (Input.GetKeyDown(KeyCode.G)) { KeyHit((uint)'g'); }
+			if (Input.GetKeyDown(KeyCode.H)) { KeyHit((uint)'h'); }
+			if (Input.GetKeyDown(KeyCode.I)) { KeyHit((uint)'i'); }
+			if (Input.GetKeyDown(KeyCode.J)) { KeyHit((uint)'j'); }
+			if (Input.GetKeyDown(KeyCode.K)) { KeyHit((uint)'k'); }
+			if (Input.GetKeyDown(KeyCode.L)) { KeyHit((uint)'l'); }
+			if (Input.GetKeyDown(KeyCode.M)) { KeyHit((uint)'m'); }
+			if (Input.GetKeyDown(KeyCode.N)) { KeyHit((uint)'n'); }
+			if (Input.GetKeyDown(KeyCode.O)) { KeyHit((uint)'o'); }
+			if (Input.GetKeyDown(KeyCode.P)) { KeyHit((uint)'p'); }
+			if (Input.GetKeyDown(KeyCode.Q)) { KeyHit((uint)'q'); }
+			if (Input.GetKeyDown(KeyCode.R)) { KeyHit((uint)'r'); }
+			if (Input.GetKeyDown(KeyCode.S)) { KeyHit((uint)'s'); }
+			if (Input.GetKeyDown(KeyCode.T)) { KeyHit((uint)'t'); }
+			if (Input.GetKeyDown(KeyCode.U)) { KeyHit((uint)'u'); }
+			if (Input.GetKeyDown(KeyCode.V)) { KeyHit((uint)'v'); }
+			if (Input.GetKeyDown(KeyCode.W)) { KeyHit((uint)'w'); }
+			if (Input.GetKeyDown(KeyCode.X)) { KeyHit((uint)'x'); }
+			if (Input.GetKeyDown(KeyCode.Y)) { KeyHit((uint)'y'); }
+			if (Input.GetKeyDown(KeyCode.Z)) { KeyHit((uint)'z'); }
+			if (Input.GetKeyDown(KeyCode.Space)) { KeyHit((uint)' '); }
 		}
 	}
 
