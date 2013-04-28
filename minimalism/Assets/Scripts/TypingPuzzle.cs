@@ -51,6 +51,8 @@ public class TypingPuzzle : MonoBehaviour
 			labelsOff[i] = new FSprite(buttonNames[puzzleSequence[i]] + "-off");
 			labelsOn[i].x = i * buttonWidth; 
 			labelsOff[i].x = i * buttonWidth; 
+			// next button to the right
+			buttonWidth = labelsOn[i].width + 5f;
 			puzzleUI.AddChild(labelsOn[i]);
 		}
 		currentChar = 0;
