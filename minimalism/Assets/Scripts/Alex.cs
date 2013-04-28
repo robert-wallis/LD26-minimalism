@@ -3,12 +3,11 @@ using System.Collections;
 
 public class Alex : MonoBehaviour
 {
-	Pillars pillars;
+	public BlockingSystem pillars;
 
 	// Use this for initialization
 	void Start()
 	{
-		pillars = GetComponent<Pillars>();
 	}
 
 	// Update is called once per frame
@@ -21,6 +20,6 @@ public class Alex : MonoBehaviour
 
 	public void SendPillars()
 	{
-		pillars.SendPillars();
+		pillars.SendBlock();
 	}
 }

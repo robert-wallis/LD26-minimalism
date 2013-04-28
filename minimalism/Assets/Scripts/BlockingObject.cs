@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Pillar : MonoBehaviour
+public class BlockingObject : MonoBehaviour
 {
 	public Vector3 startPosition;
 	public Quaternion startRotation;
@@ -9,7 +9,7 @@ public class Pillar : MonoBehaviour
 	public Quaternion destinationRotation;
 	public float speed = 2f;
 
-	// setup the pillar to move into this Z location
+	// setup the object to move into this Z location
 	public void Init(float destZ)
 	{
 		startPosition.z = destZ;
