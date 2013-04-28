@@ -14,7 +14,7 @@ public class Powerup : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.collider.name == "Player") {
+		if (null != aaron && other.collider.name == "Player") {
 			aaron.walkwaysLeft += value;
 			audio.Play();
 			Destroy(this);

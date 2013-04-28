@@ -15,6 +15,70 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":69},
 	"sourceSize": {"w":512,"h":75}
+},
+"puzzle-down-off.png":
+{
+	"frame": {"x":0,"y":409,"w":47,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":35},
+	"sourceSize": {"w":47,"h":35}
+},
+"puzzle-down-on.png":
+{
+	"frame": {"x":0,"y":372,"w":47,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":35},
+	"sourceSize": {"w":47,"h":35}
+},
+"puzzle-left-off.png":
+{
+	"frame": {"x":0,"y":249,"w":35,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":47},
+	"sourceSize": {"w":35,"h":47}
+},
+"puzzle-left-on.png":
+{
+	"frame": {"x":0,"y":200,"w":35,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":47},
+	"sourceSize": {"w":35,"h":47}
+},
+"puzzle-right-off.png":
+{
+	"frame": {"x":0,"y":151,"w":35,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":47},
+	"sourceSize": {"w":35,"h":47}
+},
+"puzzle-right-on.png":
+{
+	"frame": {"x":0,"y":102,"w":35,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":47},
+	"sourceSize": {"w":35,"h":47}
+},
+"puzzle-up-off.png":
+{
+	"frame": {"x":0,"y":335,"w":47,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":35},
+	"sourceSize": {"w":47,"h":35}
+},
+"puzzle-up-on.png":
+{
+	"frame": {"x":0,"y":298,"w":47,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":35},
+	"sourceSize": {"w":47,"h":35}
 }},
 "meta": {
 	"app": "http://www.texturepacker.com",
@@ -23,6 +87,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:6fa50069a7db59749f407aea42e56e18$"
+	"smartupdate": "$TexturePacker:SmartUpdate:813a89bf8db55646108250b393158009$"
 }
 }
