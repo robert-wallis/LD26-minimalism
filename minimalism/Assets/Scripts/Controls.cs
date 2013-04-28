@@ -4,7 +4,7 @@ using System.Collections;
 public class Controls : MonoBehaviour
 {
 	GameObject player;
-	float speed = 30f;
+	float speed = 20f;
 	float jumpForce = 400f;
 	Vector3 jumpVector = Vector3.zero;
 	Vector3 playerStartPosition;
@@ -26,7 +26,7 @@ public class Controls : MonoBehaviour
 	{
 		player.transform.position = playerStartPosition;
 		player.transform.rotation = playerStartRotation;
-		player.rigidbody.velocity = Vector3.forward * 20f;
+		player.rigidbody.velocity = Vector3.forward * speed;
 	}
 
 	void Update()
@@ -39,7 +39,6 @@ public class Controls : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		//player.transform.Translate(0f, 0f, speed * Time.fixedDeltaTime);
 		if (Vector3.zero != jumpVector) {
 			player.rigidbody.AddForce(jumpVector);
 			jumpVector = Vector3.zero;
