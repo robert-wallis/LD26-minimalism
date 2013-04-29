@@ -49,7 +49,7 @@ class GameOver : MonoBehaviour
 		countDown.text = "" + (int)(waitLeft + 1f);
 		if (waitLeft < 0) {
 			CleanupUI();
-			gamestate.StartGame();
+			gamestate.RestartGame();
 		}
 		waitLeft -= Time.deltaTime;
 	}

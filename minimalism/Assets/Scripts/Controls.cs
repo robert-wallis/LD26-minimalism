@@ -10,12 +10,30 @@ public class Controls : MonoBehaviour
 	Vector3 playerStartPosition;
 	Quaternion playerStartRotation;
 
+	bool playing = false;
+
 	void Awake()
 	{
 		player = GameObject.Find("Player");
 		playerStartPosition = player.transform.position;
 		playerStartRotation = player.transform.rotation;
+		player.rigidbody.Sleep();
+		player.SetActive(false);
 		Cleanup();
+	}
+
+	void GameStarting()
+	{
+		playing = true;
+		player.SetActive(true);
+		player.rigidbody.WakeUp();
+	}
+
+	void GameEnding()
+	{
+		playing = false;
+		player.SetActive(false);
+		player.rigidbody.Sleep();
 	}
 
 	// called from GameState send message
@@ -28,22 +46,33 @@ public class Controls : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetButtonDown("Fire1")) {
-			player.audio.Play();
-			jumpVector = Vector3.up * jumpForce;
+		if (playing) {
+			if (Input.GetButtonDown("Fire1")) {
+				player.audio.Play();
+				jumpVector = Vector3.up * jumpForce;
+			}
+			if (player.transform.position.y < -10) {
+				GameState.instance.GameOver(this.gameObject);
+			}
+		} else {
+			if (Input.anyKeyDown) {
+				GameState.instance.StartGame();
+			}
 		}
 	}
 
 	void FixedUpdate()
 	{
-		// constant speed, sometimes something hits us and slows us down
-		Vector3 newV = player.rigidbody.velocity;
-		newV.z = speed;
-		player.rigidbody.velocity = newV;
+		if (playing) {
+			// constant speed, sometimes something hits us and slows us down
+			Vector3 newV = player.rigidbody.velocity;
+			newV.z = speed;
+			player.rigidbody.velocity = newV;
 
-		if (Vector3.zero != jumpVector) {
-			player.rigidbody.AddForce(jumpVector);
-			jumpVector = Vector3.zero;
+			if (Vector3.zero != jumpVector) {
+				player.rigidbody.AddForce(jumpVector);
+				jumpVector = Vector3.zero;
+			}
 		}
 	}
 }

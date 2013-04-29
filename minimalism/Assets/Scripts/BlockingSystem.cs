@@ -14,12 +14,23 @@ public class BlockingSystem : MonoBehaviour
 	public float sendBetweenDelay = 0.2f;
 	float delayLeft = 0f;
 	public float zInFrontOfPlayer = 150f;
+	public bool started = false;
 
 	// Use this for initialization
 	void Start()
 	{
-		player = GameObject.Find("/Player");
 		blockingObjects = new LinkedList<GameObject>();
+	}
+
+	void GameStarting()
+	{
+		player = GameObject.Find("/Player");
+		started = true;
+	}
+
+	void GameEnding()
+	{
+		started = false;
 	}
 
 	public void Cleanup()
@@ -35,6 +46,10 @@ public class BlockingSystem : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (!started) {
+			return;
+		}
+
 		if (leftToSend > 0) {
 			if (delayLeft <= 0f) {
 				delayLeft = sendBetweenDelay;

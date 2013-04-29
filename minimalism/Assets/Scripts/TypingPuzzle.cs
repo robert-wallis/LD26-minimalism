@@ -24,11 +24,23 @@ public class TypingPuzzle : MonoBehaviour
 	Alex.Puzzle currentPuzzle;
 	Color onColor = new Color(251.0f / 255.0f, 169.0f / 255.0f, 25.0f / 255.0f);
 
+	bool started = false;
+
 	void Start()
 	{
 		puzzleUI = new FContainer();
 		puzzleUI.x = Futile.screen.width * .1f;
 		Futile.stage.AddChild(puzzleUI);
+	}
+
+	void GameStarting()
+	{
+		started = true;
+	}
+
+	void GameEnding()
+	{
+		started = false;
 	}
 
 	public void Cleanup()
@@ -115,6 +127,9 @@ public class TypingPuzzle : MonoBehaviour
 
 	void Update()
 	{
+		if (!started) {
+			return;
+		}
 		// check what characters someone typed
 		if (inPuzzle && currentChar < puzzleSequence.Length) {
 			if (Input.GetKeyDown(KeyCode.UpArrow)) { KeyHit(0); }

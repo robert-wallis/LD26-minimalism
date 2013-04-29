@@ -23,7 +23,7 @@ public class GA_ExampleTutorial : EditorWindow
 		switch(_tourStep)
 		{
 		case 0:
-			GUILayout.Label("GameAnalytics Tutorial - Getting started!", EditorStyles.whiteLargeLabel);
+			GUILayout.Label("GameAnalytics Tutorial - Getting playing!", EditorStyles.whiteLargeLabel);
 			EditorGUILayout.Space();
 			EditorGUILayout.LabelField("This tutorial will show you examples of how each feature of the GameAnalytics Package can be used in a simple game.", EditorStyles.wordWrappedLabel);
 			EditorGUILayout.Space();

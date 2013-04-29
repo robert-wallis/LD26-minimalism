@@ -25,12 +25,24 @@ public class Aaron : MonoBehaviour
 	float generatePowerup;
 	public uint walkwaysLeft;
 
+	bool playing = false;
+
 	void Start()
 	{
 		walkways = new LinkedList<GameObject>();
 		powerups = new LinkedList<GameObject>();
 		incrementPosition = new Vector3(0.0f, 0.0f, 10.0f);
 		Cleanup();
+	}
+
+	void GameStarting()
+	{
+		playing = true;
+	}
+
+	void GameEnding()
+	{
+		playing = false;
 	}
 
 	void Cleanup()
@@ -53,32 +65,29 @@ public class Aaron : MonoBehaviour
 
 	void Update()
 	{
-		// TODO: remove cheat
-		if (Input.GetKeyDown(KeyCode.KeypadPlus)) {
-			walkwaysLeft += 10;
-		}
-		if (Input.GetKeyDown(KeyCode.KeypadMinus)) {
-			walkwaysLeft -= 10;
-		}
-		if (Input.GetKeyDown(KeyCode.KeypadMultiply)) {
-			GameState.instance.GameOver(this.gameObject);
+		if (playing) {
+			if (Input.GetKeyDown(KeyCode.Pause)) {
+				GameState.instance.GameOver(this.gameObject);
+			}
 		}
 	}
 
 	void FixedUpdate()
 	{
-		GenerateWalkways();
-		if (player.transform.position.z > highScoreDistance) {
-			GA.API.Design.NewEvent("player:distance:high", player.transform.position.z);
-			highScoreDistance = (((uint)player.transform.position.z / 1000) * 1000) + 1000;
-		}
-		if (walkwaysLeft > highScoreWalkways) {
-			GA.API.Design.NewEvent("player:walkways:high", walkwaysLeft);
-			highScoreWalkways = ((walkwaysLeft / 100) * 100) + 100;
-		}
-		if (player.transform.position.z > generatePowerup) {
-			generatePowerup = (((int)player.transform.position.z / 100) * 100) + 100f;
-			GeneratePowerup();
+		if (playing) {
+			GenerateWalkways();
+			if (player.transform.position.z > highScoreDistance) {
+				GA.API.Design.NewEvent("player:distance:high", player.transform.position.z);
+				highScoreDistance = (((uint)player.transform.position.z / 1000) * 1000) + 1000;
+			}
+			if (walkwaysLeft > highScoreWalkways) {
+				GA.API.Design.NewEvent("player:walkways:high", walkwaysLeft);
+				highScoreWalkways = ((walkwaysLeft / 100) * 100) + 100;
+			}
+			if (player.transform.position.z > generatePowerup) {
+				generatePowerup = (((int)player.transform.position.z / 100) * 100) + 100f;
+				GeneratePowerup();
+			}
 		}
 	}
 

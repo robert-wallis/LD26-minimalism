@@ -202,7 +202,7 @@ public class GA_Settings : ScriptableObject
 			
 			//Start the submit queue for sending messages to the server
 			GA.RunCoroutine(GA_Queue.SubmitQueue());
-			GA.Log("GameAnalytics: Submission queue started.");
+			GA.Log("GameAnalytics: Submission queue playing.");
 		}
 	}
 	

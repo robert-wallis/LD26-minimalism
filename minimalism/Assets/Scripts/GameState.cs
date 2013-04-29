@@ -4,49 +4,50 @@ using UnityEngine;
 
 class GameState : MonoBehaviour
 {
-	Controls controls;
+	GameOver gameover;
+
 	GameObject player;
+	GameObject backgroundMusic;
 	Vector3 playerStartPosition;
 	Quaternion playerStartRotation;
-	GameOver gameover;
 	public static GameState instance;
+
+	bool started = false;
 
 	void Awake()
 	{
 		instance = this; // not a CS singleton, but is a Unity singleton
-		controls = GetComponent<Controls>();
-		player = GameObject.Find("/Player");
 		gameover = GetComponent<GameOver>();
-		gameover.enabled = false;
-	}
-
-	void Update()
-	{
-		// game over
-		if (player.transform.position.y < -10) {
-			GameOver(this.gameObject);
-		}
+		backgroundMusic = GameObject.Find("/environment/background music");
 	}
 
 	public void StartGame()
 	{
 		gameover.enabled = false;
-		controls.enabled = true;
+		backgroundMusic.audio.Play();
+		SendMessageUpwards("GameStarting", SendMessageOptions.DontRequireReceiver);
+		player = GameObject.Find("/Player");
+	}
+
+	public void RestartGame()
+	{
 		SendMessageUpwards("Cleanup", SendMessageOptions.DontRequireReceiver);
-		GameObject.Find("/Player/Mesh").renderer.enabled = true;
+		StartGame();
 	}
 
 	public void GameOver(GameObject cause)
 	{
 		gameover.enabled = true;
-		controls.enabled = false;
-		GameObject.Find("/Player/Mesh").renderer.enabled = false;
+		SendMessageUpwards("GameEnding", SendMessageOptions.DontRequireReceiver);
 		GA.API.Design.NewEvent("player:gameover:" + cause.name, player.transform.position);
+		backgroundMusic.audio.Stop();
 	}
 
 	public void GameWin()
 	{
-		// TODO: real game win
-		GameOver(this.gameObject);
+		gameover.enabled = true;
+		SendMessageUpwards("GameEnding", SendMessageOptions.DontRequireReceiver);
+		GA.API.Design.NewEvent("player:gamewin:walkwaysLeft", (float)GetComponent<Aaron>().walkwaysLeft);
+		backgroundMusic.audio.Stop();
 	}
 }

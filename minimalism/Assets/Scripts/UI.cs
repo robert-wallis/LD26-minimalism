@@ -9,6 +9,8 @@ public class UI : MonoBehaviour
 
 	Aaron aaron;
 
+	bool playing = false;
+
 	void Start()
 	{
 		SetupFutile();
@@ -40,8 +42,20 @@ public class UI : MonoBehaviour
 		Futile.atlasManager.LoadFont("comfortaa32", "comfortaa32_0", "UI/comfortaa32", 0f, 0f);
 	}
 
+	void GameStarting()
+	{
+		playing = true;
+	}
+
+	void GameEnding()
+	{
+		playing = false;
+	}
+
 	void Update()
 	{
-		walkwaysLeft.text = aaron.walkwaysLeft + " left";
+		if (playing) {
+			walkwaysLeft.text = aaron.walkwaysLeft + " left";
+		}
 	}
 }

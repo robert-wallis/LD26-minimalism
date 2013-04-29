@@ -170,7 +170,7 @@ public static class GA_Queue
 		{
 			_submittingData = true;
 			
-			GA.Log("GameAnalytics: Queue submit started");
+			GA.Log("GameAnalytics: Queue submit playing");
 			
 			GA.API.Submit.SubmitQueue(_queue, Submitted, SubmitError);
 		}

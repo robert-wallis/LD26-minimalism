@@ -62,6 +62,8 @@ public class Alex : MonoBehaviour
 	};
 	uint currentPuzzle;
 
+	bool playing = false;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -69,19 +71,34 @@ public class Alex : MonoBehaviour
 		aaronObject = GameObject.Find("/game/aaron");
 	}
 
+	void GameStarting()
+	{
+		playing = true;
+		pillars.SendMessage("GameStarting");
+		typingPuzzle.SendMessage("GameStarting");
+	}
+
+	void GameEnding()
+	{
+		playing = false;
+		typingPuzzle.SendMessage("GameEnding");
+	}
+
 	// Update is called once per frame
 	void Update()
 	{
-		if (!puzzleInPlay && currentPuzzle < puzzles.Length) {
-			timeTillObstacle -= Time.deltaTime;
-			if (timeTillObstacle < 0) {
-				timeTillObstacle = timeTillObstacleRefill;
-				puzzleInPlay = true;
-				SendPillars();
-				if (puzzles[currentPuzzle].words) {
-					alexObject.audio.PlayOneShot(alexWordPuzzle[puzzles[currentPuzzle].alexWordClipId]);
+		if (playing) {
+			if (!puzzleInPlay && currentPuzzle < puzzles.Length) {
+				timeTillObstacle -= Time.deltaTime;
+				if (timeTillObstacle < 0) {
+					timeTillObstacle = timeTillObstacleRefill;
+					puzzleInPlay = true;
+					SendPillars();
+					if (puzzles[currentPuzzle].words) {
+						alexObject.audio.PlayOneShot(alexWordPuzzle[puzzles[currentPuzzle].alexWordClipId]);
+					}
+					typingPuzzle.GeneratePuzzle(this, puzzles[currentPuzzle]);
 				}
-				typingPuzzle.GeneratePuzzle(this, puzzles[currentPuzzle]);
 			}
 		}
 	}
