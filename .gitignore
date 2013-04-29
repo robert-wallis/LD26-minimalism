@@ -1,8 +1,9 @@
-[Ll]ibrary/
 [Oo]bj/
 [Tt]emp/
 Release/
 screencaps/
+ScriptAssemblies/
+metadata/
 *.csproj
 *.sln
 *.suo
