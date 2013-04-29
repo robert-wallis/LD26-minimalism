@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
 	FSprite logo;
 	FLabel youWin;
 	FLabel youLoose;
+	GameObject futilecamera;
 
 	Aaron aaron;
 
@@ -16,6 +17,7 @@ public class UI : MonoBehaviour
 
 	void Start()
 	{
+		futilecamera = GameObject.Find("/Futile/Camera");
 		SetupFutile();
 		version = new FLabel("comfortaa20", "v" + VERSION);
 		version.anchorX = 1f;
@@ -53,6 +55,7 @@ public class UI : MonoBehaviour
 
 	void GameStarting()
 	{
+		futilecamera.SetActive(false);
 		playing = true;
 		Futile.stage.RemoveChild(logo);
 		Futile.stage.RemoveChild(youWin);
@@ -62,6 +65,7 @@ public class UI : MonoBehaviour
 
 	void GameEnding()
 	{
+		futilecamera.SetActive(true);
 		playing = false;
 		Futile.stage.AddChild(version);
 	}

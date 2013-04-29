@@ -86,6 +86,7 @@ public class Alex : MonoBehaviour
 	{
 		playing = false;
 		typingPuzzle.SendMessage("GameEnding");
+		Cleanup();
 	}
 
 	void GameLoose()
