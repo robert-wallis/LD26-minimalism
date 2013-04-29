@@ -4,7 +4,7 @@ using System.Collections;
 public class Powerup : MonoBehaviour
 {
 	Aaron aaron;
-	public uint value = 50;
+	public uint value = 25;
 
 	// Use this for initialization
 	void Start()
