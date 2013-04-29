@@ -12,8 +12,6 @@ class GameState : MonoBehaviour
 	Quaternion playerStartRotation;
 	public static GameState instance;
 
-	bool started = false;
-
 	void Awake()
 	{
 		instance = this; // not a CS singleton, but is a Unity singleton
@@ -39,6 +37,7 @@ class GameState : MonoBehaviour
 	{
 		gameover.enabled = true;
 		SendMessageUpwards("GameEnding", SendMessageOptions.DontRequireReceiver);
+		SendMessageUpwards("GameLoose", SendMessageOptions.DontRequireReceiver);
 		GA.API.Design.NewEvent("player:gameover:" + cause.name, player.transform.position);
 		backgroundMusic.audio.Stop();
 	}
@@ -47,6 +46,7 @@ class GameState : MonoBehaviour
 	{
 		gameover.enabled = true;
 		SendMessageUpwards("GameEnding", SendMessageOptions.DontRequireReceiver);
+		SendMessageUpwards("GameWinning", SendMessageOptions.DontRequireReceiver);
 		GA.API.Design.NewEvent("player:gamewin:walkwaysLeft", (float)GetComponent<Aaron>().walkwaysLeft);
 		backgroundMusic.audio.Stop();
 	}

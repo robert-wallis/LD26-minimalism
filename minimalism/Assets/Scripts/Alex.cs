@@ -13,6 +13,8 @@ public class Alex : MonoBehaviour
 	public AudioClip[] alexWordPuzzle;
 	public AudioClip[] aaronWordPuzzle;
 	public AudioClip[] alexNo;
+	public AudioClip alexBadBad;
+	public AudioClip alexRightArrows;
 	GameObject alexObject;
 	GameObject aaronObject;
 
@@ -62,6 +64,8 @@ public class Alex : MonoBehaviour
 	};
 	uint currentPuzzle;
 
+	uint timesLost = 0;
+
 	bool playing = false;
 
 	// Use this for initialization
@@ -82,6 +86,14 @@ public class Alex : MonoBehaviour
 	{
 		playing = false;
 		typingPuzzle.SendMessage("GameEnding");
+	}
+
+	void GameLoose()
+	{
+		timesLost++;
+		if (timesLost % 3 == 0) {
+			alexObject.audio.PlayOneShot(alexBadBad);
+		}
 	}
 
 	// Update is called once per frame

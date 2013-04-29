@@ -6,6 +6,9 @@ public class UI : MonoBehaviour
 	public static string VERSION = "0.6";
 	FLabel version;
 	FLabel walkwaysLeft;
+	FSprite logo;
+	FLabel youWin;
+	FLabel youLoose;
 
 	Aaron aaron;
 
@@ -26,6 +29,12 @@ public class UI : MonoBehaviour
 		walkwaysLeft.anchorY = 0f;
 		walkwaysLeft.y = -Futile.screen.halfHeight + 20;
 		Futile.stage.AddChild(walkwaysLeft);
+
+		logo = new FSprite("logo");
+		Futile.stage.AddChild(logo);
+
+		youWin = new FLabel("comfortaa32", "Congratulations You Win");
+		youLoose = new FLabel("comfortaa32", "Game Over");
 	}
 
 	void SetupFutile()
@@ -45,11 +54,24 @@ public class UI : MonoBehaviour
 	void GameStarting()
 	{
 		playing = true;
+		Futile.stage.RemoveChild(logo);
+		Futile.stage.RemoveChild(youWin);
+		Futile.stage.RemoveChild(youLoose);
 	}
 
 	void GameEnding()
 	{
 		playing = false;
+	}
+
+	void GameWinning()
+	{
+		Futile.stage.AddChild(youWin);
+	}
+
+	void GameLoose()
+	{
+		Futile.stage.AddChild(youLoose);
 	}
 
 	void Update()

@@ -63,15 +63,6 @@ public class Aaron : MonoBehaviour
 		}
 	}
 
-	void Update()
-	{
-		if (playing) {
-			if (Input.GetKeyDown(KeyCode.Pause)) {
-				GameState.instance.GameOver(this.gameObject);
-			}
-		}
-	}
-
 	void FixedUpdate()
 	{
 		if (playing) {

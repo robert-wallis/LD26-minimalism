@@ -41,6 +41,7 @@ public class TypingPuzzle : MonoBehaviour
 	void GameEnding()
 	{
 		started = false;
+		Cleanup();
 	}
 
 	public void Cleanup()

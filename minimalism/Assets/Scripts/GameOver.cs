@@ -5,15 +5,13 @@ using UnityEngine;
 class GameOver : MonoBehaviour
 {
 	GameState gamestate;
-	float waitLeft = 5f;
-	FLabel gameOver;
+	float waitLeft = 15f;
 	FLabel countDown;
 	bool enableStartup = true;
 
 	void Start()
 	{
 		gamestate = GetComponent<GameState>();
-		gameOver = new FLabel("comfortaa32", "Game Over");
 		countDown = new FLabel("comfortaa32", "");
 	}
 
@@ -25,17 +23,13 @@ class GameOver : MonoBehaviour
 	void OnEnableStartup()
 	{
 		enableStartup = false;
-		waitLeft = 5f;
+		waitLeft = 15f;
 		countDown.y = -Futile.screen.halfHeight * .5f;
-		Futile.stage.AddChild(gameOver);
 		Futile.stage.AddChild(countDown);
 	}
 
 	void CleanupUI()
 	{
-		if (null != gameOver) {
-			Futile.stage.RemoveChild(gameOver);
-		}
 		if (null != countDown) {
 			Futile.stage.RemoveChild(countDown);
 		}

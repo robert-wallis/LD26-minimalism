@@ -54,6 +54,12 @@ public class Controls : MonoBehaviour
 			if (player.transform.position.y < -10) {
 				GameState.instance.GameOver(this.gameObject);
 			}
+			if (Input.GetKeyDown(KeyCode.End)) {
+				GameState.instance.GameOver(this.gameObject);
+			}
+			if (Input.GetKey(KeyCode.RightControl) && Input.GetKeyDown(KeyCode.Home)) {
+				GameState.instance.GameWin();
+			}
 		} else {
 			if (Input.anyKeyDown) {
 				GameState.instance.StartGame();
