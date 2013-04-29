@@ -4,7 +4,6 @@ using UnityEngine;
 
 class GameState : MonoBehaviour
 {
-	GameOver gameover;
 
 	GameObject player;
 	GameObject backgroundMusic;
@@ -15,13 +14,11 @@ class GameState : MonoBehaviour
 	void Awake()
 	{
 		instance = this; // not a CS singleton, but is a Unity singleton
-		gameover = GetComponent<GameOver>();
 		backgroundMusic = GameObject.Find("/environment/background music");
 	}
 
 	public void StartGame()
 	{
-		gameover.enabled = false;
 		backgroundMusic.audio.Play();
 		SendMessageUpwards("GameStarting", SendMessageOptions.DontRequireReceiver);
 		player = GameObject.Find("/Player");
@@ -35,7 +32,6 @@ class GameState : MonoBehaviour
 
 	public void GameOver(GameObject cause)
 	{
-		gameover.enabled = true;
 		SendMessageUpwards("GameEnding", SendMessageOptions.DontRequireReceiver);
 		SendMessageUpwards("GameLoose", SendMessageOptions.DontRequireReceiver);
 		GA.API.Design.NewEvent("player:gameover:" + cause.name, player.transform.position);
@@ -44,7 +40,6 @@ class GameState : MonoBehaviour
 
 	public void GameWin()
 	{
-		gameover.enabled = true;
 		SendMessageUpwards("GameEnding", SendMessageOptions.DontRequireReceiver);
 		SendMessageUpwards("GameWinning", SendMessageOptions.DontRequireReceiver);
 		GA.API.Design.NewEvent("player:gamewin:walkwaysLeft", (float)GetComponent<Aaron>().walkwaysLeft);

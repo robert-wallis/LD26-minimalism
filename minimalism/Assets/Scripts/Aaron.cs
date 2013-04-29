@@ -90,7 +90,7 @@ public class Aaron : MonoBehaviour
 			GameObject newWalkway = (GameObject)Instantiate(walkwayPrefab, spawnPosition, spawnRotation);
 			newWalkway.name = "aaron " + spawnPosition.z;
 			newWalkway.transform.parent = pushObject.transform;
-			newWalkway.transform.Translate(Vector3.left * 30f);
+			newWalkway.transform.Translate(Vector3.left * 60f);
 			newWalkway.transform.Rotate(Vector3.forward + Vector3.up, 180f);
 			Go.to(
 				newWalkway.transform,

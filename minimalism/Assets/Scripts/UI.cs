@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UI : MonoBehaviour
 {
-	public static string VERSION = "0.6";
+	public static string VERSION = "1.0";
 	FLabel version;
 	FLabel walkwaysLeft;
 	FSprite logo;
@@ -57,11 +57,13 @@ public class UI : MonoBehaviour
 		Futile.stage.RemoveChild(logo);
 		Futile.stage.RemoveChild(youWin);
 		Futile.stage.RemoveChild(youLoose);
+		Futile.stage.RemoveChild(version);
 	}
 
 	void GameEnding()
 	{
 		playing = false;
+		Futile.stage.AddChild(version);
 	}
 
 	void GameWinning()

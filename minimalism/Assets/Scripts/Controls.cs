@@ -48,8 +48,12 @@ public class Controls : MonoBehaviour
 	{
 		if (playing) {
 			if (Input.GetButtonDown("Fire1")) {
-				player.audio.Play();
-				jumpVector = Vector3.up * jumpForce;
+				float vy = player.rigidbody.velocity.y;
+				float avy = Mathf.Abs(vy); 
+				if (avy < 0.01f || vy < -jumpForce) {
+					player.audio.Play();
+					jumpVector = Vector3.up * jumpForce;
+				}
 			}
 			if (player.transform.position.y < -10) {
 				GameState.instance.GameOver(this.gameObject);
