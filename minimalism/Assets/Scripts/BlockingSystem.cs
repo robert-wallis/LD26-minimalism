@@ -7,7 +7,7 @@ public class BlockingSystem : MonoBehaviour
 {
 	GameObject player;
 	public GameObject prefab;
-	LinkedList<GameObject> blockingObjects;
+	LinkedList<GameObject> blockingObjects = new LinkedList<GameObject>();
 
 	public int leftToSend = 0;
 	public int amountToSend = 3;
@@ -16,10 +16,8 @@ public class BlockingSystem : MonoBehaviour
 	public float zInFrontOfPlayer = 150f;
 	public bool started = false;
 
-	// Use this for initialization
 	void Start()
 	{
-		blockingObjects = new LinkedList<GameObject>();
 	}
 
 	void GameStarting()
@@ -30,10 +28,11 @@ public class BlockingSystem : MonoBehaviour
 
 	void GameEnding()
 	{
+		Cleanup();
 		started = false;
 	}
 
-	public void Cleanup()
+	void Cleanup()
 	{
 		leftToSend = 0;
 		delayLeft = 0f;
@@ -46,7 +45,7 @@ public class BlockingSystem : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (!started) {
+		if (!started || player == null) {
 			return;
 		}
 
@@ -71,6 +70,11 @@ public class BlockingSystem : MonoBehaviour
 	public void SendBlocks()
 	{
 		leftToSend = amountToSend;
+	}
+
+	public void BlockAverted()
+	{
+		Cleanup();
 	}
 
 }

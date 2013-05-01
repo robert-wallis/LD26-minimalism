@@ -24,6 +24,7 @@ public class Controls : MonoBehaviour
 
 	void GameStarting()
 	{
+		Cleanup();
 		playing = true;
 		player.SetActive(true);
 		player.rigidbody.WakeUp();
@@ -37,7 +38,7 @@ public class Controls : MonoBehaviour
 	}
 
 	// called from GameState send message
-	public void Cleanup()
+	void Cleanup()
 	{
 		player.transform.position = playerStartPosition;
 		player.transform.rotation = playerStartRotation;

@@ -42,15 +42,16 @@ public class Aaron : MonoBehaviour
 
 	void GameEnding()
 	{
+		Cleanup();
 		playing = false;
 	}
 
 	void Cleanup()
 	{
-		spawnPosition = spawnPositionDefault;
-		spawnRotation = walkwayPrefab.transform.rotation;
 		walkwaysLeft = 100;
 		generatePowerup = 100f;
+		spawnPosition = spawnPositionDefault;
+		spawnRotation = walkwayPrefab.transform.rotation;
 		while (walkways.Count > 0) {
 			GameObject removable = walkways.First.Value;
 			Destroy(removable);

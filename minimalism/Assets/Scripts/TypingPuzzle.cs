@@ -40,11 +40,11 @@ public class TypingPuzzle : MonoBehaviour
 
 	void GameEnding()
 	{
-		started = false;
 		Cleanup();
+		started = false;
 	}
 
-	public void Cleanup()
+	void Cleanup()
 	{
 		if (null != puzzleUI)
 			puzzleUI.RemoveAllChildren();

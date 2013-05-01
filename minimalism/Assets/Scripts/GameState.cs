@@ -24,12 +24,6 @@ class GameState : MonoBehaviour
 		player = GameObject.Find("/Player");
 	}
 
-	public void RestartGame()
-	{
-		SendMessageUpwards("Cleanup", SendMessageOptions.DontRequireReceiver);
-		StartGame();
-	}
-
 	public void GameOver(GameObject cause)
 	{
 		SendMessageUpwards("GameEnding", SendMessageOptions.DontRequireReceiver);

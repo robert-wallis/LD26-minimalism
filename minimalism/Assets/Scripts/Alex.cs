@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Alex : MonoBehaviour
 {
-	public BlockingSystem pillars;
+	public BlockingSystem blockingSystem;
 	public TypingPuzzle typingPuzzle;
 
 	float timeTillObstacle = 3f;
@@ -73,20 +73,22 @@ public class Alex : MonoBehaviour
 	{
 		alexObject = GameObject.Find("/game/alex");
 		aaronObject = GameObject.Find("/game/aaron");
+		Cleanup();
 	}
 
 	void GameStarting()
 	{
 		playing = true;
-		pillars.SendMessage("GameStarting");
+		blockingSystem.SendMessage("GameStarting");
 		typingPuzzle.SendMessage("GameStarting");
 	}
 
 	void GameEnding()
 	{
-		playing = false;
-		typingPuzzle.SendMessage("GameEnding");
 		Cleanup();
+		playing = false;
+		blockingSystem.SendMessage("GameEnding");
+		typingPuzzle.SendMessage("GameEnding");
 	}
 
 	void GameLoose()
@@ -95,6 +97,13 @@ public class Alex : MonoBehaviour
 		if (timesLost % 3 == 0) {
 			alexObject.audio.PlayOneShot(alexBadBad);
 		}
+	}
+
+	void Cleanup()
+	{
+		timeTillObstacle = timeTillObstacleRefill;
+		puzzleInPlay = false;
+		currentPuzzle = 0;
 	}
 
 	// Update is called once per frame
@@ -106,7 +115,7 @@ public class Alex : MonoBehaviour
 				if (timeTillObstacle < 0) {
 					timeTillObstacle = timeTillObstacleRefill;
 					puzzleInPlay = true;
-					SendPillars();
+					blockingSystem.SendBlocks();
 					if (puzzles[currentPuzzle].words) {
 						alexObject.audio.PlayOneShot(alexWordPuzzle[puzzles[currentPuzzle].alexWordClipId]);
 					}
@@ -116,24 +125,10 @@ public class Alex : MonoBehaviour
 		}
 	}
 
-	public void Cleanup()
-	{
-		pillars.Cleanup();
-		typingPuzzle.Cleanup();
-		timeTillObstacle = timeTillObstacleRefill;
-		puzzleInPlay = false;
-		currentPuzzle = 0;
-	}
-
-	public void SendPillars()
-	{
-		pillars.SendBlocks();
-	}
-
 	// the puzzle finished successfully
 	public void PuzzleSuccessCB()
 	{
-		pillars.Cleanup();
+		blockingSystem.BlockAverted();
 		puzzleInPlay = false;
 		if (puzzles[currentPuzzle].words) {
 			aaronObject.audio.PlayOneShot(aaronWordPuzzle[puzzles[currentPuzzle].aaronWordClipId]);
