@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UI : MonoBehaviour
 {
-	public static string VERSION = "1.0";
+	public static string VERSION = "1.01";
 	FLabel version;
 	FLabel walkwaysLeft;
 	FSprite logo;
